@@ -1,0 +1,101 @@
+from flask import Flask, request
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    steamid = request.args.get("steamid", "NULL")
+    return f"""
+    <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>LapkaCode Site</title>
+<style>
+    * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+
+    body {{
+        font-family: 'Segoe UI', sans-serif;
+        height: 100vh;
+        background: url('/static/bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }}
+
+    .container {{
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 50px;
+        text-align: center;
+        width: 80%;
+        max-width: 800px;
+        color: white;
+    }}
+
+    .header {{
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }}
+
+    .buttons {{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }}
+
+    .button {{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+        margin: 10px;
+        padding: 15px 25px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        transition: background 0.3s;
+        width: 120px;
+    }}
+
+    .button:hover {{
+        background: rgba(255, 255, 255, 0.3);
+    }}
+
+    .button img {{
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+    }}
+
+    .footer {{
+        font-size: 14px;
+        margin-top: 20px;
+        opacity: 0.7;
+    }}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">Basic sandbox</div>
+    <div class="header">Welcome to our server!</div>
+    <div class="footer">
+        Your steamid: {steamid}
+    </div>
+    <div class="footer">
+        ©BasicSandbox.com All rights reserved.
+    </div>
+</div>
+
+</body>
+</html>
+    """
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
